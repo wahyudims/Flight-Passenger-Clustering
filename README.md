@@ -49,5 +49,30 @@ Data cleaning is used to identify data that has a NaN value so that it can be pr
 As we can see most people belong on FFP tier 4 and the highest user of FFP tier 6 is on group age of 41-60. The airlines can focus more on advertising FFP tier 4 and FFP tier 6 spesifically for group age of 41-60. <br>
 
 ## Feature Engineering
-Feature engineering is used to create new features such as new columns and dummy variables to make the data more precise. The goal of feature engineering is to create a new set of columns that will produce more accurate results for machine learning modeling. For feature engineering, we're going to create new columns that will determine the age and employment years of client. We will also groupin credit status of client into two categories which are default and not-default. Default means the client has been late to pay their payment for more than 60 days. To change certain columns into more appropriate values, label encoding and one hot encoding must be used. I also treated the imbalance data handling using Undersampling method. And last I scaled the data using StandardScaler.
+Feature engineering is used to create new features such as new columns and dummy variables to make the data more precise. The goal of feature engineering is to create a new set of columns that will produce more accurate results for machine learning modeling. According to Tao, Y. (2020). We will use LRFMC analysis. LRFMC analysis is a method used to rank and group customers based on the length of customer relationship, recency, frequency, monetary total of their recent transactions and average discount to identify the best customers and perform targeted marketing campaigns. Recency can be known from 'LAST_TO_END' column. Frecuency can be known from 'FLIGHT_COUNT' column. Monetary can be known from 'SEG_KM_SUM' column. The length of customer relationship can be known by substracting the FPP join date from the date data is taken (LOAD_DATE) and average discount that can be gotten from 'avg_discount'
 
+## Result and Visualization
+### Elbow plot
+<img src="https://github.com/user-attachments/assets/a5934848-43ff-4854-8318-c3cf8b7114c9" width="1000"><br>
+
+The elbow looked like when the value of K is equal to 4 or 5.
+
+### Silhouette method
+<img src="https://github.com/user-attachments/assets/6c734607-988f-43c1-bea4-d12f7d7e9480" width="1000"><br>
+
+As we can see K = 4 gives as the highest score. So for this data we decide to use K = 4
+
+### Clustering & RFM chart
+<img src="https://github.com/user-attachments/assets/6cfa5b6a-5318-4dc7-b300-238c5a90a2da" width="500"><br>
+
+<img src="https://github.com/user-attachments/assets/201cfc03-6e41-4782-ab32-9675dcce5a6c" width="500"><br>
+
+The graphs show the classification of each cluster based on length of customer relationship, recency, frequency, monetary total of their recent transactions and average discount
+
+## Conclussion
+After we did clustering, there are four type of customers.
+
+* Group 1: This group consist of 11921 customers. This is a low valued customer. It has low value of all element of LRFMC. For these users, they should be maintained as much as possible, and then stimulate their consumption to stimulate their consumption vitality.
+* Group 2: This group consist of 8013 customers. Others low except high L. This means these customers have been joining our FFP program for so long but they are not very active. It could mean that they are seasonal reasons or related to promotional activities. For such users, it is necessary to maintain and stimulate consumption as much as possible.
+* Group 3: This group consist of 7884 customers. R is high while L, F, and M is relatively low. It means this group is a 'new customer' group. We should treat this group with a good care and give them a various offer to make them keep with us.
+* Group 4: This group consist of 7563 customers. It has moderate value of L and high value of F and M but low value of R. It indicates that they are 'valuable customers' but we also consider consider them as 'lost customers'. we should try to grasp the latest information of these customers, ask them if there was anything that made them uncomfortable when using our airlines so we could fix it. Give them the best offer to make them come back to us.
